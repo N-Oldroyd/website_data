@@ -1,0 +1,60 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "A bar chart of olympic sailing medals by country",
+    "data": {
+        "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/sailing_data.json",
+        "format": {"type": "json"}
+    },
+    "title": {
+        "text": "Olympic Sailing Medals",
+        "subtitle": ["Medal tallies for each country from all modern Olympic games.", "Countries with no medals are not included"]},
+    "transform": [{
+    "calculate": "if(datum.Medal === 'Bronze', 0, if(datum.Medal === 'Silver', 1, 2))",
+    "as": "MedalOrder"
+  }],
+  "params": [
+    {
+      "name": "highlight",
+      "select": {"type": "point", "on": "pointerover"}
+    },
+    {"name": "select", "select": "point"}
+  ],
+    "width": 600,
+    "height": 400,
+    "mark": {"type": "bar", "stroke": "black", "cursor": "pointer"},
+    "encoding": {
+        "x": {"field": "country", "type": "nominal", "title": "", "axis": {"labelAngle": -45}},
+        "y": {"field": "Count", "type": "quantitative", "title": ""},
+        "color": {"field": "Medal", "legend":{"title": "", "orient": "top-left"}, "scale": {"domain": ["Gold", "Silver", "Bronze"], "range": ["rgb(255,215,25", "rgb(131,137,150)", "rgb(205,127,50)"]}},
+        "order": {"field": "MedalOrder"},
+        "tooltip": [
+            {"field": "country", "type": "nominal", "title": "Country"},
+            {"field": "Medal", "type": "ordinal"},
+            {"field": "Count", "type": "quantitative"}
+        ],
+        "fillOpacity": {
+      "condition": {"param": "select", "value": 1},
+      "value": 0.3
+    },
+    "strokeWidth": {
+      "condition": [
+        {
+          "param": "select",
+          "empty": false,
+          "value": 1
+        },
+        {
+          "param": "highlight",
+          "empty": false,
+          "value": 1
+        }
+      ],
+      "value": 0
+    }
+  },
+  "config": {
+    "scale": {
+      "bandPaddingInner": 0.2
+    }
+  }
+}

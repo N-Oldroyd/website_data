@@ -1,0 +1,46 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/german_employment_data.json", "format": {"type": "json"}},
+    "width": 400,
+    "height": 300,
+    "title": "German Employment by Region (000's)",
+    "transform": [
+        {
+            "lookup": "1_variable_attribute_label",
+            "from": {
+                "data": {
+                    "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/germany.geojson",
+                    "format": {"property": "features"}
+                },
+                "key": "properties.NAME_1",
+                "fields": ["type", "properties", "geometry"]
+            }
+        }
+    ],
+    "layer": [
+        {
+            "mark": {"type": "geoshape"},
+            "encoding": {"color": {
+      "field": "value",
+      "type": "quantitative",
+      "scale": {"domain": [-1, 2], "scheme": "darkblue", "reverse": true},
+      "legend": {
+        "title": "Employment",
+        "labelFontWeight": "lighter",
+        "direction": "vertical",
+        "gradientLength": 200
+      }
+    },
+        "tooltip": [
+            {"field": "1_variable_attribute_label", "title": "Region"},
+            {"field": "value", "title": "Employment Level (000's)"}
+        ]}
+        },
+        {"mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 0.3}}
+    ],
+    "encoding": {"color": {"field": "value", "type": "quantitative", "scale": {"domain":[0, 1000]}},
+    "tooltip": [
+            {"field": "1_variable_attribute_label", "title": "Region"},
+            {"field": "value", "title": "Employment"}]
+}
+}

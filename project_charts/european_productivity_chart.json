@@ -1,0 +1,127 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {"url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/european_productivity_data-2.json"},
+  "title": {
+    "text": "GDP per hour, 1995 = 100",
+    "anchor": "start",
+    "dx": 25, 
+    "fontSize": 18,
+    "subtitle": "Source: ONS and Eurostat, 2024",
+    "subtitleFontSize": 10,
+    "subtitleFont": "Gill Sans",
+    "font": "Gill Sans",
+    "fontWeight": "normal"
+  },
+  "vconcat":[
+    {
+    "width": 600,
+    "height": 520,
+    "transform": [{"filter": 
+    "datum.country == 'UK' || datum.country == 'Italy' || datum.country == 'Germany' || datum.country == 'Spain' || datum.country == 'Netherlands' || datum.country == 'Poland' || datum.country == 'Belgium' || datum.country == 'Sweden' || datum.country == 'Ireland'"}],
+    "encoding": {
+      "x": {"field": "date", 
+            "type": "temporal", 
+            "title": "",
+            "scale": {"domain": {"param": "brush"}}, 
+            "timeUnit": "year", 
+            "axis": {"tickCount": 10, "gridColor": "white"}},
+      "y": {"field": "value", 
+            "type": "quantitative", 
+            "title": "", 
+            "axis": {
+                    "gridDash": [5]}},
+      "color": {
+          "field":"country",
+          "type":"nominal",
+          "legend": {
+            "title": "Filter:", 
+            "orient": "bottom", 
+            "labelFontSize": 8,
+            "labelFont": "Gill Sans",
+            "titleFont": "Gill Sans",
+            "titleFontWeight": "normal",
+            "columnPadding": 29
+          }
+      },
+      "opacity": {
+        "condition": [
+            {"param": "highlight", "value": 1}
+        ],
+        "value": 0.2
+      }
+      
+    },
+    "layer": [{
+      "params": [
+        {
+        "name": "highlight",
+        "value": [{"country": "UK"}],
+        "select": {
+          "type": "point",
+          "fields": ["country"],
+          "on": "click",
+          "toggle": "event.shiftKey",
+          "clear": "dblclick"},
+          "bind": "legend"     
+        }
+            
+    ],
+      "mark": {"type": "line", "strokeWidth": 1.5, "stroke": "transparent"}
+    },
+    {
+      "mark": {"type": "rule", "strokeDash": [4,4], "strokeOpacity": 1},
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "color": {"value": "#a3a2a2"},
+        "y": {}
+      },
+      "transform":[
+        {"filter": {"field": "date", "timeUnit": "year", "range": [2008,2008]}}
+      ]
+    },
+    {
+      "mark": {"type": "line", "strokeWidth": 1.5, "tooltip": {"content": "encoding"}}
+    }, 
+    {
+     "encoding": {
+        "x": {"aggregate": "max", "field": "date"},
+        "y": {"aggregate": {"argmax": "date"}, "field": "value"}
+      },
+      "layer": [{
+      "mark": {"type": "circle"}
+    }]
+  }]
+},
+{
+    "width": 600,
+    "height": 60,
+    "mark": {"type": "line", "strokeWidth": 1},
+    "params": [
+      {"name": "brush", "select": {"type": "interval", "encodings": ["x"]}, "value": 
+            {"x": [{"year": 1995},
+                   {"year": 2015}]}}
+    ],
+    "transform": [{"filter": 
+    "datum.country == 'UK' || datum.country == 'Italy' || datum.country == 'Germany' || datum.country == 'Spain' || datum.country == 'Netherlands' || datum.country == 'Poland' || datum.country == 'Belgium' || datum.country == 'Sweden' || datum.country == 'Ireland'"}],
+    "encoding": {
+      "x": {"field": "date", "type": "temporal", "title": ""},
+      "y": {
+        "field": "value",
+        "type": "quantitative",
+        "axis": {"tickCount": 3, "grid": false},
+        "title": ""
+      },
+        "color": {"field": "country", "type": "nominal"},
+        "opacity": {
+        "condition": [
+            {"param": "highlight", "value": 1}
+        ],
+        "value": 0.2
+      }
+      
+    }
+  }
+  ]
+}
+
+

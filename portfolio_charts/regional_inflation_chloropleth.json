@@ -1,0 +1,72 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Prices in the UK", "subtitle": "Weighted annual change in average prices by region"
+    },
+    "width": 400,
+    "height": 300,
+    "autosize": "fit",
+    "data": 
+      {
+      "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/region_inflation.json"
+    },
+    "params": [
+    {
+      "name": "Year",
+      "value": 2021,
+      "bind": {
+        "input": "range",
+        "min": 1996,
+        "max": 2021,
+        "step": 1
+      }
+    },
+    {
+    "name": "Month",
+    "value": 1,
+    "bind": {
+      "input": "range",
+      "min": 1,
+      "max": 12,
+      "step": 1
+    }
+  }
+  ],
+    "transform": [
+      {
+        "lookup": "region",
+        "from": {
+          "data": {
+            "url": "https://raw.githubusercontent.com/EconomicsObservatory/courses/main/datasets/advanced/nuts1.json",
+            "format": {"type": "json", "property": "features"}
+          },
+          "key": "properties.NUTS_NAME",
+          "fields": ["type", "properties", "geometry"]
+        }
+      },
+    {"calculate": "datum.weighted_inflation*100", "as": "inflation"
+    },
+    {"filter": "year(datum.quote_date) == Year & month(datum.quote_date) == Month"}
+
+
+    ],
+    "encoding": {
+      "color": {
+        "field": "inflation",
+        "type": "quantitative",
+        "scale": {"domain": [-1,2], "scheme": "darkblue", "reverse": true},
+        "legend": {
+          "title": "(%)",
+          "labelFontWeight": "lighter",
+          "direction": "vertical",
+          "gradientLength": 200
+        }
+      },
+      "tooltip": [
+      {"field": "region", "title": "Country"},
+      {"field": "inflation", "title": "Inflation Rate"}
+    ]
+    },
+    "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 0.3}
+  }
+  

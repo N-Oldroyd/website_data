@@ -1,0 +1,18 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "A scatterplot showing horsepower and miles per gallons for various cars.",
+    "title": {"text": "The Price of Vice", "subtitle": "Mean prices for selected goods since 1988"},
+    "data": {
+            "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/vice_prices.json"
+        },
+    "width": 400,
+    "height": 300,
+    "mark": {"type": "circle", "size": 7, "opacity": 0.5},
+    "encoding": {
+      "x": {"field": "quote_date", "type": "temporal", "title": "", "scale": {"domain": ["1987", "2025"]}},
+      "y": {"field": "mean_price", "type": "quantitative", "title": "Mean Price (£)"},
+      "color": {"field": "description", "legend":{"title":"", "orient": "top-left", "symbolSize": 20, "labelFontSize": 8}}
+      
+    }
+  }
+  

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/worldbank_data-4.json"
+  },
+  "width": 600,
+  "height": 400,
+  "title": {
+    "text": "Gross Fixed Capital Formation by Country (% GDP)", 
+    "subtitle": "Source: World Bank, 2024", 
+    "fontSize": 18, 
+    "subtitleFontSize": 10,
+    "anchor": "start",
+    "dx": 50,
+    "dy": 50,
+    "font": "Gill Sans",
+    "fontWeight": "normal",
+    "subtitleFont": "Gill Sans"},
+  "params": [
+    {
+      "name": "Year",
+      "value": 2022,
+      "bind": {
+        "input": "range",
+        "step": 1,
+        "min": 1975,
+        "max": 2022,
+        "name": "Year:"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "lookup": "countryiso3code",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/map_world.geojson",
+          "format": {"property": "features"}
+        },
+        "key": "properties.ISO3",
+        "fields": ["type", "geometry", "properties"]
+      }
+    },
+    {"filter": "datum.date == Year"}
+  ],
+  "projection": {
+    "type": "naturalEarth1"
+  },
+  "layer": [
+    {
+      "mark": {"type": "geoshape"},
+      "encoding": {"color": {"value": "lightgrey"},
+    "tooltip": [
+      {"field": "country", "title": "Country"},
+      {"field": "value", "title": "Gross Fixed Capital Formation (% of GDP)"}]
+    }
+    },
+    {"mark": {"type": "geoshape"}}
+  ],
+  
+  "encoding": {
+    "color": {
+              "field": "value", 
+              "type": "quantitative", 
+              "legend": {
+                "title": "% of GDP",
+                "titleAlign": "center",
+                "titleFont": "Gill Sans",
+                "titleFontWeight": "normal",
+                "orient": "none",
+                "legendY": 80,
+                "legendX": 620,
+                "labelFont": "Gill Sans"
+              }, 
+              "scale": {"domain": [0,50]}},
+"tooltip": [
+      {"field": "country", "title": "Country"},
+      {"field": "value", "title": "Gross Fixed Capital Formation (% of GDP)"}]
+  }
+}

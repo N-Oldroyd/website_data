@@ -1,0 +1,247 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/productivity_shortfall_data.json"
+    },
+    "title": {
+        "text": "GDP per worker",
+        "anchor": "start",
+        "dx": 40,
+        "fontSize": 18,
+        "subtitle": "Constant 2021 US$ | Source: World Bank, 2024",
+        "subtitleFontSize": 10,
+        "subtitleFont": "Gill Sans",
+        "font": "Gill Sans",
+        "fontWeight": "normal"
+    },
+    "params": [
+        {
+            "name": "Year",
+            "value": 2022,
+            "bind": {
+                "input": "range",
+                "step": 1,
+                "min": 1991,
+                "max": 2022,
+                "name": "Year:"
+            }
+        }
+    ],
+    "transform": [
+        {
+            "timeUnit": "year",
+            "field": "date",
+            "as": "format_date"
+        }
+    ],
+    "vconcat": [
+        {
+            "transform": [
+                {
+                    "filter": "year(datum.format_date) == Year"
+                }
+            ],
+            "width": 600,
+            "height": 520,
+            "encoding": {
+                "x": {
+                    "field": "countryiso3code",
+                    "title": "",
+                    "axis": {
+                        "labelFont": "Gill Sans"
+                    }
+                },
+                "y": {
+                    "field": "value",
+                    "title": "Output per worker",
+                    "type": "quantitative",
+                    "scale": {
+                        "domain": [
+                            0,
+                            250000
+                        ]
+                    },
+                    "axis": {
+                        "title": "",
+                        "labelFont": "Gill Sans",
+                        "gridDash": [
+                            4,
+                            4
+                        ]
+                    }
+                },
+                "fillOpacity": {
+                    "condition": {
+                        "param": "highlight",
+                        "value": 1
+                    },
+                    "value": 0.3
+                },
+                "color": {
+                    "field": "countryiso3code",
+                    "legend": null,
+                    "scale": {
+                        "scheme": "tableau10"
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "gbr_diff",
+                        "title": "UK Shortfall (%)",
+                        "format": ".2f"
+                    },
+                    {
+                        "field": "value",
+                        "title": "Output per worker",
+                        "format": ".2f"
+                    }
+                ]
+            },
+            "layer": [
+                {
+                    "params": [
+                        {
+                            "name": "highlight",
+                            "select": {
+                                "type": "point",
+                                "on": "pointerover"
+                            }
+                        }
+                    ],
+                    "mark": {
+                        "type": "bar"
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "dy": -10,
+                        "font": "Gill Sans"
+                    },
+                    "encoding": {
+                        "text": {
+                            "field": "value",
+                            "format": ".2f"
+                        },
+                        "fillOpacity": {
+                            "condition": {
+                                "param": "highlight",
+                                "value": 1,
+                                "empty": false
+                            },
+                            "value": 0
+                        },
+                        "color": {
+                            "value": "black"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "transform": [
+                {
+                    "filter": "year(datum.format_date) == Year"
+                },
+                {
+                    "filter": "datum.countryiso3code != 'GBR'"
+                }
+            ],
+            "width": 600,
+            "height": 100,
+            "encoding": {
+                "x": {
+                    "field": "gbr_diff",
+                    "title": "Output per worker",
+                    "type": "quantitative",
+                    "axis": {
+                        "title": "UK Shortfall (%)",
+                        "labelFont": "Gill Sans",
+                        "labelFontWeight": "normal",
+                        "gridDash": [
+                            4,
+                            4
+                        ]
+                    },
+                    "scale": {
+                        "domain": [
+                            -130,
+                            130
+                        ]
+                    }
+                },
+                "y": {
+                    "field": "countryiso3code",
+                    "title": "",
+                    "axis": {
+                        "labelFont": "Gill Sans"
+                    }
+                },
+                "fillOpacity": {
+                    "condition": {
+                        "param": "highlight",
+                        "value": 1
+                    },
+                    "value": 0.3
+                },
+                "color": {
+                    "field": "countryiso3code",
+                    "legend": null
+                },
+                "tooltip": [
+                    {
+                        "field": "gbr_diff",
+                        "title": "UK Shortfall (%)",
+                        "format": ".2f"
+                    },
+                    {
+                        "field": "value",
+                        "title": "Output per worker",
+                        "format": ".2f"
+                    }
+                ]
+            },
+            "layer": [
+                {
+                    "params": [
+                        {
+                            "name": "highlight",
+                            "select": {
+                                "type": "point",
+                                "on": "pointerover"
+                            }
+                        }
+                    ],
+                    "mark": {
+                        "type": "bar",
+                        "align": "center"
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "dx": 10,
+                        "font": "Gill Sans"
+                    },
+                    "encoding": {
+                        "text": {
+                            "field": "gbr_diff",
+                            "format": ".2f"
+                        },
+                        "color": {
+                            "value": "black"
+                        },
+                        "fillOpacity": {
+                            "condition": {
+                                "param": "highlight",
+                                "value": 1,
+                                "empty": false
+                            },
+                            "value": 0
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

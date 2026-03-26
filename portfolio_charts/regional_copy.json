@@ -1,0 +1,59 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Regional Inflation"
+    },
+    "width": 300,
+    "height": 450,
+    "data": {
+      "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/region_inflation.json"
+    },
+    "params": [
+      {
+        "name": "date",
+        "value": 2024,
+        "bind": {
+          "input": "range",
+          "min": 2003,
+          "max": 2024,
+          "step": 1,
+          "name": "Year:"
+        }
+      }
+    ],
+    "transform": [
+      {
+        "lookup": "region",
+        "from": {
+          "data": {
+            "url": "https://raw.githubusercontent.com/EconomicsObservatory/courses/main/datasets/advanced/nuts1.json",
+            "format": {"type": "json", "property": "features"}
+          },
+          "key": "NUTS_NAME",
+          "fields": ["type", "properties", "geometry"]
+        }
+      },
+      {"filter": "datum.quote_date == date"},
+    {"calculate": "datum.weighted_inflation*100", "as": "inflation"
+    }
+    ],
+    "encoding": {
+      "color": {
+        "field": "inflation",
+        "type": "quantitative",
+        "legend": {
+          "title": null,
+          "labelFontWeight": "lighter",
+          "labelExpr": "'£'+datum.label",
+          "orient": "none",
+          "legendX": 0,
+          "legendY": -10,
+          "direction": "horizontal",
+          "gradientLength": 200
+        }
+      }
+    },
+    "projection": {"type": "naturalEarth1"},
+    "mark": {"type": "geoshape", "stroke": "black", "strokeWidth": 0.3}
+  }
+  

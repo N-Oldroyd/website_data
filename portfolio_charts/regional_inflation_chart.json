@@ -1,0 +1,23 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {"text": "Regional Inflation", "subtitle": "Mean prices for selected goods since "},
+    "data": {
+            "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/region_inflation.json",
+            "format": {"type": "json"}
+        },
+    "autosize": "fit",
+    "width": 400,
+    "height": 250,
+    "transform":[
+        {"calculate": "datum.weighted_inflation*100", "as": "inflation"
+    }
+    ],
+    "mark": {"type": "line", "size": 1.3, "opacity": 0.5},
+    "encoding": {
+      "x": {"field": "quote_date", "type": "temporal", "title": "", "scale": {"domain": ["1996-01-01", "2022-01-01"]}},
+      "y": {"field": "inflation", "type": "quantitative", "title": "Annual Inflation (%)"},
+      "color": {"field": "region", "legend":{"title":"", "orient": "top-right", "symbolSize": 20, "labelFontSize": 8}}
+      
+    }
+  }
+  

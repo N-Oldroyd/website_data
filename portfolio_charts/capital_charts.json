@@ -1,0 +1,200 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Capital Data in the UK",
+    "hconcat": [
+      {
+        "vconcat": [
+          {
+            "data": {
+                "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/capital_data_LRWU.json",
+                "format": {"type": "json", "property": "years"}
+            },
+            "height": 95,
+            "width": 110,
+            "title": {
+              "text": ["PNFCs net average capital", "employed in £million"],
+              "fontSize": 10
+            },
+         
+            "transform":[
+                {"filter": "datum.year >=1995"}
+            ],
+            "mark": "line",
+            "encoding": {
+              "x": {"field": "date", "type": "temporal", "title": "",  "scale": {"domain": ["1995", "2024"]}},
+              "y": {"field": "value", "type": "quantitative", "axis": {"titleFontSize": 10}, "title": "Capital (£)"}
+              }
+          },
+          {
+            "data": {
+                "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/capital_data_LRWW.json",
+                "format": {"type": "json", "property": "years"}
+            },
+            "height": 95,
+            "width": 110,
+            "title": {
+              "text": ["PNFCs net rate of", "return (%)"],
+              "fontSize": 10
+            },
+            "transform":[
+                {"filter": "datum.year >=1995"}
+            ],
+            "mark": "line",
+            "encoding": {
+              "x": {"field": "date", "type": "temporal", "title": "",  "scale": {"domain": ["1995", "2024"]}},
+              "y": {"field": "value", "type": "quantitative", "axis": {"titleFontSize": 10}, "title": "Rate of Return (%)"}
+              }
+          },
+          {
+            "data": {
+                "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/capital_data_LRXC.json",
+                "format": {"type": "json", "property": "years"}
+            },
+            "height": 95,
+            "width": 110,
+            "title": {
+              "text":["UKCS companies net average", "capital employed in £million"],
+              "fontSize": 10
+            },
+            "transform":[
+                {"filter": "datum.year >=1995"}
+            ],
+            "mark": "line",
+            "encoding": {
+              "x": {"field": "date", "type": "temporal", "title": "",  "scale": {"domain": ["1995", "2024"]}},
+              "y": {"field": "value", "type": "quantitative", "axis": {"titleFontSize": 10}, "title": "Capital (£)"}
+              }
+            }
+        ]
+      },
+      {
+        "vconcat": [
+          {
+            "data": {
+                "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/capital_data_LRYO.json",
+                "format": {"type": "json", "property": "years"}
+            },
+            "height": 95,
+            "width": 110,
+            "transform":[
+              {"filter": "datum.year >=1995"}
+            ],
+            "title": {
+              "text": ["Service sector PNFCs net average", "capital employed in £million"],
+              "fontSize": 10
+            }, 
+            "mark": "line",
+            "encoding": {
+              "x": {"field": "date", "type": "temporal", "title": "",  "scale": {"domain": ["1995", "2024"]}},
+              "y": {"field": "value", "type": "quantitative", "axis": {"titleFontSize": 10}, "title": "Capital (£)"}
+              }
+          },
+          {
+            "data": {
+                "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/capital_data_LRYA.json",
+                "format": {"type": "json", "property": "years"}
+            },
+            "height": 95,
+            "width": 110,
+            "transform":[
+              {"filter": "datum.year >=1995"}
+            ],
+            "title": {
+              "text": ["Manufacturing PNFCs net average", "capital employed in £million"],
+              "fontSize": 10
+            },
+            "mark": "line",
+            "encoding": {
+              "x": {"field": "date", "type": "temporal", "title": "",  "scale": {"domain": ["1995", "2024"]}},
+              "y": {"field": "value", "type": "quantitative", "axis": {"titleFontSize": 10}, "title": "Capital (£)"}
+              }
+          },
+          {
+            "data": {
+                "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/capital_data_LRXN.json",
+                "format": {"type": "json", "property": "years"}
+            },
+            "height": 95,
+            "width": 110,
+            "transform":[
+              {"filter": "datum.year >=1995"}
+            ],
+            "title": {
+              "text": ["Non-UKCS PNFCs net average", "capital employed in £million"],
+              "fontSize": 10
+            },
+            "mark": "line",
+            "encoding": {
+              "x": {"field": "date", "type": "temporal", "title": "",  "scale": {"domain": ["1995", "2024"]}},
+              "y": {"field": "value", "type": "quantitative", "axis": {"titleFontSize": 10}, "title": "Capital (£)"}
+              }
+          }
+        ]
+      },
+      {
+        "vconcat": [
+          {
+            "data": {
+                "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/capital_data_LRXP.json",
+                "format": {"type": "json", "property": "years"}
+            },
+            "height": 95,
+            "width": 110,
+            "transform":[
+              {"filter": "datum.year >=1995"}
+            ],
+            "title": {
+              "text": ["Non-UKCS PNFCs net", "rate of return (%)"],
+              "fontSize": 10
+            },
+            "mark": "line",
+            "encoding": {
+              "x": {"field": "date", "type": "temporal", "title": "",  "scale": {"domain": ["1995", "2024"]}},
+              "y": {"field": "value", "type": "quantitative", "axis": {"titleFontSize": 10}, "title": "Rate of Return (%)"}
+              }
+          },
+          {
+            "data": {
+                "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/capital_data_LRYQ.json",
+                "format": {"type": "json", "property": "years"}
+            },
+            "height": 95,
+            "width": 110,
+            "transform":[
+              {"filter": "datum.year >=1995"}
+            ],
+            "title": {
+              "text": ["Service sector PNFCs", "net rate of return (%) SA"],
+              "fontSize": 10
+            },
+            "mark": "line",
+            "encoding": {
+              "x": {"field": "date", "type": "temporal", "title": "",  "scale": {"domain": ["1995", "2024"]}},
+              "y": {"field": "value", "type": "quantitative", "axis": {"titleFontSize": 10}, "title": "Rate of Return (%)"}
+              }
+          },
+          {
+            "data": {
+                "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/capital_data_LRXE.json",
+                "format": {"type": "json", "property": "years"}
+            },
+            "height": 95,
+            "width": 110,
+            "transform":[
+              {"filter": "datum.year >=1995"}
+            ],
+            "title": {
+              "text": ["UKCS companies net", "rate of return (%)"],
+              "fontSize": 10
+            },
+            "mark": "line",
+            "encoding": {
+              "x": {"field": "date", "type": "temporal", "title": "",  "scale": {"domain": ["1995", "2024"]}},
+              "y": {"field": "value", "type": "quantitative", "axis": {"titleFontSize": 10}, "title": "Rate of Return (%)"}
+              }          
+          }
+        ]
+      }
+    ]
+  }
+  

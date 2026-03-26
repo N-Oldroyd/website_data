@@ -1,0 +1,227 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/gdphrs_gfcf_regression_data.json"},
+    "hconcat":[
+        {
+        "vconcat": [
+            {
+            "width": 200,
+            "height": 250,
+            "title": {"text": "1963 - 1977", "font": "Gill Sans", "fontWeight": "normal"},
+            "transform": [
+                {"filter": "datum.start_year == 1963"},
+                {"calculate": "'R^2: '+format(datum.r_squared, '.2f')", "as": "R2"}
+            ],
+            "layer": [
+            {
+            "mark": {
+                "type": "point"
+            },
+            "encoding": {
+                "x": {"field": "gfcf", "type": "quantitative", "title": ""},
+                "y": {"field": "gdphrs_usd_ppp", "type": "quantitative", "title": ""},
+                "tooltip": [
+                {"field": "date", "title": "Year"},
+                {"field": "countryiso3code", "title": "Country_Code"},
+                {"field": "gfcf", "title": "Investment"},
+                {"field": "gdphrs_usd_ppp", "title": "Output per hour"}
+                ]
+                }
+            },
+            {
+                "mark": "line",
+                "encoding": {
+                "x": {"field": "gfcf", "type": "quantitative", "title": ""},
+                "y": {
+                    "field": "predicted_gdphrs", 
+                    "type": "quantitative",
+                    "title": "Output per hour",
+                    "axis": {"labelFont": "Gill Sans", "titleFont": "Gill Sans", "titleFontWeight": "normal"}
+                },
+                "color": {"value": "red"}
+            }
+            },
+            {
+                "mark": {
+                    "type": "text",
+                    "color": "black",
+                    "x": "width",
+                    "align": "right",
+                    "y": -5,
+                    "font": "Gill Sans"
+                },
+                "encoding":{"text": {"type": "nominal", "field": "R2"}}
+            }
+                
+            ]
+            
+        }, 
+        {
+            "width": 200,
+            "height": 250,
+            "title": {"text": "1978 - 1992", "font": "Gill Sans", "fontWeight": "normal"},
+            "transform": [
+                {"filter": "datum.start_year == 1978"},
+                {"calculate": "'R^2: '+format(datum.r_squared, '.2f')", "as": "R2"}
+            ],
+            "layer": [
+            {
+            "mark": {
+                "type": "point"
+            },
+            "encoding": {
+                "x": {"field": "gfcf", "type": "quantitative", "title": ""},
+                "y": {"field": "gdphrs_usd_ppp", "type": "quantitative", "title": ""},
+                "tooltip": [
+                {"field": "date", "title": "Year"},
+                {"field": "countryiso3code", "title": "Country_Code"},
+                {"field": "gfcf", "title": "Investment"},
+                {"field": "gdphrs_usd_ppp", "title": "Output per hour"}
+                ]
+                }
+            },
+            {
+                "mark": "line",
+                "encoding": {
+                "x": {"field": "gfcf", "type": "quantitative", "title": "Gross Fixed Capital Formation (% of GDP)", "axis": {"labelFont": "Gill Sans", "titleFont": "Gill Sans", "titleFontWeight": "normal"}},
+                "y": {
+                    "field": "predicted_gdphrs", 
+                    "type": "quantitative",
+                    "title": "Output per hour",
+                    "axis": {"labelFont": "Gill Sans", "titleFont": "Gill Sans", "titleFontWeight": "normal"}
+                },
+                "color": {"value": "red"}
+                }
+            },
+            {
+                "mark": {
+                    "type": "text",
+                    "color": "black",
+                    "x": "width",
+                    "align": "right",
+                    "y": -5,
+                    "font": "Gill Sans"
+                },
+                "encoding":{"text": {"type": "nominal", "field": "R2"}}
+            }
+                
+            ]
+            
+        }
+    ]
+},
+{
+        
+        "vconcat": [
+            {
+            "width": 200,
+            "height": 250,
+            "title": {"text": "1993 - 2007", "font": "Gill Sans", "fontWeight": "normal"},
+            "transform": [
+                {"filter": "datum.start_year == 1993"},
+                {"calculate": "'R^2: '+format(datum.r_squared, '.2f')", "as": "R2"}
+            ],
+            "layer": [
+            {
+            "mark": {
+                "type": "point"
+            },
+            "encoding": {
+                "x": {"field": "gfcf", "type": "quantitative", "title": ""},
+                "y": {"field": "gdphrs_usd_ppp", "type": "quantitative", "title": ""},
+                "tooltip": [
+                {"field": "date", "title": "Year"},
+                {"field": "countryiso3code", "title": "Country_Code"},
+                {"field": "gfcf", "title": "Investment"},
+                {"field": "gdphrs_usd_ppp", "title": "Output per hour"}
+                ]
+                }
+            },
+            {
+                "mark": "line",
+                "encoding": {
+                "x": {"field": "gfcf", "type": "quantitative", "title": "", "axis": {"labelFont": "Gill Sans", "titleFont": "Gill Sans", "titleFontWeight": "normal"}},
+                "y": {
+                    "field": "predicted_gdphrs", 
+                    "type": "quantitative",
+                    "title": ""
+                },
+                "color": {"value": "red"}
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "color": "black",
+                "x": "width",
+                "align": "right",
+                "y": -5,
+                "font": "Gill Sans"
+            },
+            "encoding":{"text": {"type": "nominal", "field": "R2"}}
+        }
+                
+            ]
+            
+        }, 
+        {
+            "width": 200,
+            "height": 250,
+            "title": {"text": "2008 - 2022", "font": "Gill Sans", "fontWeight": "normal"},
+            "transform": [
+                {"filter": "datum.start_year == 2008"},
+                {"calculate": "'R^2: '+format(datum.r_squared, '.2f')", "as": "R2"}
+            ],
+            "layer": [
+            {
+            "mark": {
+                "type": "point"
+            },
+            "encoding": {
+                "x": {"field": "gfcf", "type": "quantitative", "title": ""},
+                "y": {"field": "gdphrs_usd_ppp", "type": "quantitative", "title": ""},
+                "tooltip": [
+                {"field": "date", "title": "Year"},
+                {"field": "countryiso3code", "title": "Country_Code"},
+                {"field": "gfcf", "title": "Investment"},
+                {"field": "gdphrs_usd_ppp", "title": "Output per hour"}
+                ]
+                }
+            },
+            {
+                "mark": "line",
+                "encoding": {
+                "x": {"field": "gfcf", "type": "quantitative", "title": "Gross Fixed Capital Formation (% of GDP)", "axis": {"labelFont": "Gill Sans", "titleFont": "Gill Sans", "titleFontWeight": "normal"}},
+                "y": {
+                    "field": "predicted_gdphrs", 
+                    "type": "quantitative",
+                    "title": ""
+                },
+                "color": {"value": "red"}
+                }
+            },
+            {
+                "mark": {
+                    "type": "text",
+                    "color": "black",
+                    "x": "width",
+                    "align": "right",
+                    "y": -5,
+                    "font": "Gill Sans"
+                },
+                "encoding":{"text": {"type": "nominal", "field": "R2"}}
+            }
+                
+            ]
+            
+        }
+    
+    ]
+    }
+ ]
+}
+
+
+
+        
+        

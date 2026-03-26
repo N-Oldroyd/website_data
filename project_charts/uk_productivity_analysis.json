@@ -1,0 +1,79 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "GDP per hour (CMV), 2022 = 100", 
+        "font": "Gill Sans",
+        "fontSize": 18,
+        "anchor": "start",
+        "dx": 25,
+        "subtitle": "Source: ONS, 2023",
+        "subtitleFont": "Gill Sans",
+        "fontWeight": "normal",
+        "subtitleFontSize": 10
+    },
+    "height": 400,
+    "width": 600,
+    "data": {
+        "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/uk_productivity_data.json"
+    },
+    "transform": [
+    {"filter": "isValid(datum.date)"},
+    {"calculate": "datetime(datum.date, 1)", "as": "year"}
+    ],
+    "layer":[
+        {
+            "mark": {"type": "line"},
+            "encoding": {
+                "x":{"field": "year", "type": "temporal", "title": "", "axis": {"gridOpacity": 0, "labelFont": "Gill Sans", "titleFont": "Gill Sans"}},
+                "y":{"field": "y", "type":"quantitative"},
+                "tooltip": [
+                    {"field": "year", "title": "Year", "timeUnit": "binnedutcyearmonthdate"},
+                    {"field": "y", "title": "Labour Productivity"}
+                ]
+                }
+        },
+        {
+            "mark": {"type": "line", "strokeDash": [4,4]},
+            "encoding": {
+                "x": {"field": "year", "type": "temporal"},
+                "y": {"field": "fitted_y", "type": "quantitative", "title": ""},
+                "color": {"value": "red"}
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "left",
+                "baseline": "top",
+                "font": "Gill Sans",
+                "color": "#e6224b",
+                "dx": 500,
+                "fontWeight": "lighter"
+            },
+            "encoding": {
+                "text": {"value": "Pre-recession trend"},
+                "y": {"value": 5},
+                "x": {"value": 10}
+            }
+        },
+        {
+            "mark": {"type": "rule", "strokeDash": [4,4]},
+            "encoding":{
+                "x": {"field": "year", "type": "temporal"}
+            },
+            "transform":[
+                {"filter": {"timeUnit": "year", "field": "year", "range": [2008,2008]}}
+            ]
+        },
+        {
+            "mark": {"type": "text", "font": "Gill Sans", "fontWeight": "lighter"},
+            "encoding":{
+                "text": {"value": "Global Financial Crisis"},
+                "y": {"value": -5},
+                "x": {"value": 400}
+            }
+        }
+        
+    ]
+
+}

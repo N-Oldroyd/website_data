@@ -1,0 +1,162 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "height": 300,
+    "description": "Tufte's Worst Example with Area Above Line for Under 25",
+    "data": {
+      "values": [
+        {"date": 1972, "col_enrol": 28, "age": "25 and over"},
+        {"date": 1972.7, "col_enrol": 29.2, "age": "25 and over"},
+        {"date": 1973, "col_enrol": 29.2, "age": "25 and over"},
+        {"date": 1973.5, "col_enrol": 32.2, "age": "25 and over"},
+        {"date": 1974, "col_enrol": 32.8, "age": "25 and over"},
+        {"date": 1974.3, "col_enrol": 32.8, "age": "25 and over"},
+        {"date": 1975, "col_enrol": 33.6, "age": "25 and over"},
+        {"date": 1975.9, "col_enrol": 33.0, "age": "25 and over"},
+        {"date": 1976, "col_enrol": 33.0, "age": "25 and over"},
+        {"date": 1972, "col_enrol": 30.9, "age": "25 and over shadow"},
+        {"date": 1972.5, "col_enrol": 31.3, "age": "25 and over shadow"},
+        {"date": 1972.7, "col_enrol": 31.3, "age": "25 and over shadow"},
+        {"date": 1973.0, "col_enrol": 33.2, "age": "25 and over shadow"},
+        {"date": 1973.4, "col_enrol": 33.0, "age": "25 and over shadow"},
+        {"date": 1974.3, "col_enrol": 32.8, "age": "25 and over shadow"},
+        {"date": 1975, "col_enrol": 33.6, "age": "25 and over shadow"},
+        {"date": 1975.4, "col_enrol": 33.1, "age": "25 and over shadow"},
+        {"date": 1976, "col_enrol": 33.0, "age": "25 and over shadow"},
+        {"date": 1972, "col_enrol": 72.0, "age": "Under 25"},
+        {"date": 1973, "col_enrol": 70.8, "age": "Under 25"},
+        {"date": 1974, "col_enrol": 67.2, "age": "Under 25"},
+        {"date": 1974.5, "col_enrol": 67.2, "age": "Under 25"},
+        {"date": 1975, "col_enrol": 66.4, "age": "Under 25"},
+        {"date": 1975.9, "col_enrol": 67.0, "age": "Under 25"},
+        {"date": 1976, "col_enrol": 67.0, "age": "Under 25"},
+        {"date": 1972, "col_enrol": 69.1, "age": "Under 25 shadow"},
+        {"date": 1973, "col_enrol": 66.5, "age": "Under 25 shadow"},
+        {"date": 1973.5, "col_enrol": 66.5, "age": "Under 25 shadow"},
+        {"date": 1973.6, "col_enrol": 66.0, "age": "Under 25 shadow"},
+        {"date": 1975, "col_enrol": 66.1, "age": "Under 25 shadow"},
+        {"date": 1975.7, "col_enrol": 66.7, "age": "Under 25 shadow"},
+        {"date": 1976, "col_enrol": 67.0, "age": "Under 25 shadow"}
+      ]
+    },
+    "layer": [
+        {
+            "transform": [
+              {"filter": "datum.age === '25 and over shadow'"},
+              {"calculate": "25", "as": "baseline"}
+            ],
+            "mark": {
+              "type": "area",
+              "opacity": 1,
+              "interpolate": "monotone",
+              "color": "#0c55f3"
+            },
+            "encoding": {
+              "x": {
+                "field": "date",
+                "type": "quantitative",
+                "title": "",
+                "axis": {"format": ".0f", "tickCount": 5}
+              },
+              "y": {
+                "field": "col_enrol",
+                "type": "quantitative",
+                "title": "25 and Over Enrollment (%)",
+                "stack": null,
+                "scale": {"domain": [25, 75]},
+                "axis": {"titleColor": "#ff7f0e", "orient": "left"}
+              },
+              "y2": {"field": "baseline"}
+            }
+          },
+          {
+            "transform": [
+              {"filter": "datum.age === 'Under 25 shadow'"},
+              {"calculate": "75", "as": "baseline"}
+            ],
+            "mark": {
+              "type": "area",
+              "opacity": 1,
+              "interpolate": "monotone",
+              "color": "#0d202e"
+            },
+            "encoding": {
+              "x": {
+                "field": "date",
+                "type": "quantitative",
+                "title": "",
+                "axis": {"format": ".0f", "tickCount": 5}
+              },
+              "y": {
+                "field": "col_enrol",
+                "type": "quantitative",
+                "title": "Under 25 Enrollment (%)",
+                "stack": null,
+                "scale": {"domain": [25, 75]}
+              },
+              "y2": {"field": "baseline"}
+            }
+          },
+        {
+          "transform": [
+            {"filter": "datum.age === 'Under 25'"},
+            {"calculate": "75", "as": "baseline"}
+          ],
+          "mark": {
+            "type": "area",
+            "opacity": 1,
+            "interpolate": "monotone",
+            "color": "#1f77b4"
+          },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "quantitative",
+              "title": "",
+              "axis": {"format": ".0f", "tickCount": 5}
+            },
+            "y": {
+              "field": "col_enrol",
+              "type": "quantitative",
+              "title": "Under 25 Enrollment (%)",
+              "stack": null,
+              "scale": {"domain": [25, 75]}
+            },
+            "y2": {"field": "baseline"}
+          }
+        },
+        {
+          "transform": [
+            {"filter": "datum.age === '25 and over'"},
+            {"calculate": "25", "as": "baseline"}
+          ],
+          "mark": {
+            "type": "area",
+            "opacity": 1,
+            "interpolate": "monotone",
+            "color": "#ff7f0e"
+          },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "quantitative",
+              "title": "",
+              "axis": {"format": ".0f", "tickCount": 5}
+            },
+            "y": {
+              "field": "col_enrol",
+              "type": "quantitative",
+              "title": "25 and Over Enrollment (%)",
+              "stack": null,
+              "scale": {"domain": [25, 75]},
+              "axis": {"titleColor": "#ff7f0e", "orient": "left"}
+            },
+            "y2": {"field": "baseline"}
+          }
+        }
+        
+      ]
+    }
+
+
+
+   
