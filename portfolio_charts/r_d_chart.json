@@ -1,0 +1,40 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Relationship between R&D spending and productivity"},
+    "width": 300,
+    "height": 300,
+    "data": {
+        "url": "https://raw.githubusercontent.com/N-Oldroyd/N-Oldroyd.github.io/refs/heads/main/r%26d_data.json"
+    },
+    "layer":[
+        {
+            "mark": {"type": "point", "filled": true, "size": 5},
+            "encoding":{
+                "x": {"field": "r&d", "type": "quantitative"},
+                "y": {"field": "gdp_pp", "type": "quantitative", "title": ""}
+            }
+        },
+        {
+            "mark": "line",
+            "encoding":{
+                "x": {"field": "r&d", "type": "quantitative", "title": "R&D Spending as % of GDP"},
+                "y": {"field": "gdp_pred", "type": "quantitative", "title": "GDP per worker"},
+                "color": {"value": "red"}
+            }
+        },
+        {
+            "transform": [
+                {"calculate": "'R^2: '+format(datum.r_square, '.2f')", "as": "R2"}
+            ],
+            "mark": {
+                "type": "text",
+                "dy": -90,
+                "dx": 72
+            },
+            "encoding":{
+                "text": {"field": "R2"}
+            }
+        }
+    ]
+}
